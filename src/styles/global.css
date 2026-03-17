@@ -1,0 +1,69 @@
+:root {
+  /* Zepto / Instamart inspired theme: vibrant purple/green with clean surfaces */
+  --primary-color: #6100c1; /* Deep Purple */
+  --primary-hover: #7b26d8;
+  --secondary-color: #00c652; /* Vivid Green */
+  --secondary-hover: #00e05d;
+  
+  --bg-color: #f7f8fb;
+  --surface-color: #ffffff;
+  --text-primary: #1c1c1c;
+  --text-secondary: #6e6e73;
+  --border-color: #e5e5ea;
+  --error-color: #ff3b30;
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 24px rgba(0,0,0,0.12);
+  
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 20px;
+  
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #09090b;
+    --surface-color: #121214;
+    --text-primary: #f2f2f2;
+    --text-secondary: #a1a1aa;
+    --border-color: #27272a;
+    --primary-color: #7b26d8;
+    --primary-hover: #9c4dff;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input, textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+/* Base utility classes can be added here if globally needed, but sticking to Modules mostly */

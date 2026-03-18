@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api/',
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 // Request interceptor to add the auth token header to requests
@@ -12,8 +12,9 @@ api.interceptors.request.use(
     const userStr = localStorage.getItem('swiftkart_user');
     if (userStr) {
       const user = JSON.parse(userStr);
-      if (user && user.access) {
-        config.headers.Authorization = `Bearer ${user.access}`;
+      const token = user.tokens?.access || user.access;
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
       }
     }
     return config;

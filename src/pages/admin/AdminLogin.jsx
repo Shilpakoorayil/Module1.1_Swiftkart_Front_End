@@ -11,9 +11,10 @@ const AdminLogin = () => {
   const { loginAdmin } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (loginAdmin(username, password)) {
+    const success = await loginAdmin(username, password);
+    if (success) {
       navigate('/admin/dashboard');
     } else {
       setError('Invalid admin credentials. Use admin / admin123');

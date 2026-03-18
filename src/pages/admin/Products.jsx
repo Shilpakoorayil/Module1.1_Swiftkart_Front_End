@@ -12,6 +12,7 @@ const Products = () => {
   const navigate = useNavigate();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({ id: '', name: '', price: '', category: '', image: null, stock: '' });
 
   const handleLogout = () => {
@@ -39,11 +40,14 @@ const Products = () => {
 
   const editProduct = (product) => {
     setIsEditing(true);
+    setIsAdding(false);
     setCurrentProduct(product);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const resetForm = () => {
     setIsEditing(false);
+    setIsAdding(false);
     setCurrentProduct({ id: '', name: '', price: '', category: '', image: null, stock: '' });
   };
 
@@ -79,14 +83,14 @@ const Products = () => {
       <main className={dashboardStyles.mainContent}>
         <div className={styles.header}>
           <h1>Product Management</h1>
-          {!isEditing && currentProduct.name === '' && (
-            <button className={styles.addNewBtn} onClick={() => setCurrentProduct({ name: '', price: '', category: '', image: null, stock: '' })}>
+          {!isEditing && !isAdding && (
+            <button className={styles.addNewBtn} onClick={() => {setIsAdding(true); setCurrentProduct({ name: '', price: '', category: '', image: null, stock: '' });}}>
               <Plus size={18} /> Add New Product
             </button>
           )}
         </div>
 
-        {(isEditing || currentProduct.name !== '' || currentProduct.price !== '') && (
+        {(isEditing || isAdding) && (
           <div className={styles.formContainer}>
             <h2>{isEditing ? 'Edit Product' : 'Add New Product'}</h2>
             <form onSubmit={handleSubmit} className={styles.productForm}>
@@ -108,12 +112,31 @@ const Products = () => {
                 <label>Category</label>
                 <input required type="text" value={currentProduct.category} onChange={(e) => setCurrentProduct({...currentProduct, category: e.target.value})} placeholder="E.g. Dairy" />
               </div>
-              <div className={styles.formGroup}>
+              <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
                 <label>Product Image</label>
-                <input type="file" accept="image/*" onChange={(e) => setCurrentProduct({...currentProduct, image: e.target.files[0]})} />
-                {isEditing && typeof currentProduct.image === 'string' && (
-                  <p style={{fontSize: '0.8rem', marginTop: '4px', color: '#666'}}>Current file: {currentProduct.image.split('/').pop()}</p>
-                )}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginTop: '5px' }}>
+                  <div style={{
+                    width: '80px', height: '80px', borderRadius: '8px', 
+                    border: '1px dashed #ccc', display: 'flex', alignItems: 'center', 
+                    justifyContent: 'center', overflow: 'hidden', backgroundColor: '#f9f9f9', flexShrink: 0
+                  }}>
+                    {currentProduct.image ? (
+                      <img 
+                        src={typeof currentProduct.image === 'string' ? currentProduct.image : URL.createObjectURL(currentProduct.image)} 
+                        alt="Preview" 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <span style={{ fontSize: '0.8rem', color: '#999', textAlign: 'center', padding: '5px' }}>No Image</span>
+                    )}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <input type="file" accept="image/*" onChange={(e) => setCurrentProduct({...currentProduct, image: e.target.files[0]})} />
+                    {isEditing && typeof currentProduct.image === 'string' && (
+                      <p style={{fontSize: '0.8rem', marginTop: '6px', color: '#666'}}>Select a file to replace existing image.</p>
+                    )}
+                  </div>
+                </div>
               </div>
               <div className={styles.formActions}>
                 <button type="submit" className={styles.saveBtn}>{isEditing ? 'Update' : 'Save'} Product</button>
@@ -139,7 +162,7 @@ const Products = () => {
               {products.map(product => (
                 <tr key={product.id}>
                   <td>
-                    <img src={product.image_url || 'https://via.placeholder.com/400'} alt={product.name} className={styles.tableImg} />
+                    <img src={product.image || import.meta.env.VITE_PLACEHOLDER_IMAGE_URL} alt={product.name} className={styles.tableImg} />
                   </td>
                   <td className={styles.nameCell}>{product.name}</td>
                   <td><span className={styles.badge}>{product.category}</span></td>

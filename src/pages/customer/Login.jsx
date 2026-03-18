@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 import styles from '../../styles/layoutform.module.css';
 
 const Login = () => {
@@ -10,7 +11,9 @@ const Login = () => {
   const [error, setError] = useState('');
   
   const { loginUser } = useAuth();
+  const { addToCart } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSendOtp = (e) => {
     e.preventDefault();
@@ -22,10 +25,14 @@ const Login = () => {
     }
   };
 
-  const handleVerifyOtp = (e) => {
+  const handleVerifyOtp = async (e) => {
     e.preventDefault();
-    if (loginUser(phone, otp)) {
-      navigate('/');
+    const success = await loginUser(phone, otp);
+    if (success) {
+      if (location.state?.productToAdd) {
+        addToCart(location.state.productToAdd);
+      }
+      navigate(location.state?.returnTo || '/');
     } else {
       setError('Invalid OTP. Use 1234 for testing.');
     }

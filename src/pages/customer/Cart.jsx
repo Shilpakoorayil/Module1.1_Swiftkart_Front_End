@@ -13,7 +13,7 @@ const Cart = () => {
   const handleCheckout = () => {
     if (user?.role === 'guest') {
       alert("Please login to proceed to checkout.");
-      navigate('/login');
+      navigate('/login', { state: { returnTo: '/checkout' } });
     } else {
       navigate('/checkout');
     }
@@ -22,7 +22,7 @@ const Cart = () => {
   if (cartItems.length === 0) {
     return (
       <div className={styles.emptyCart}>
-        <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-7359557-6024626.png" alt="Empty Cart" className={styles.emptyImg} />
+        <img src={import.meta.env.VITE_EMPTY_CART_IMAGE_URL} alt="Empty Cart" className={styles.emptyImg} />
         <h2>Your cart is empty</h2>
         <p>Looks like you haven't added anything to your cart yet.</p>
         <Link to="/" className={styles.continueBtn}>Start Shopping</Link>

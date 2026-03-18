@@ -24,7 +24,7 @@ const Home = () => {
   const handleAddToCart = (product) => {
     if (user?.role === 'guest') {
       alert("Please login to add items to your cart.");
-      navigate('/login');
+      navigate('/login', { state: { productToAdd: product } });
     } else {
       addToCart(product);
     }
@@ -49,7 +49,7 @@ const Home = () => {
             {products.map((product) => (
               <div key={product.id} className={styles.productCard}>
                 <div className={styles.imageContainer}>
-                  <img src={product.image || 'https://via.placeholder.com/400'} alt={product.name} className={styles.productImage} />
+                  <img src={product.image || import.meta.env.VITE_PLACEHOLDER_IMAGE_URL} alt={product.name} className={styles.productImage} />
                 </div>
                 <div className={styles.productInfo}>
                   <p className={styles.category}>{product.category}</p>

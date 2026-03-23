@@ -1,0 +1,267 @@
+.detailsContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 70px);
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: #ff3e6c;
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .productCard {
+    flex-direction: row;
+  }
+}
+
+.imageSection {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+@media (min-width: 768px) {
+  .imageSection {
+    border-bottom: none;
+    border-right: 1px solid #eee;
+  }
+}
+
+.productImage {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.productImage:hover {
+  transform: scale(1.05);
+}
+
+.infoSection {
+  flex: 1.2;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryBadge {
+  display: inline-block;
+  background-color: #f0f0f0;
+  color: #555;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  align-self: flex-start;
+}
+
+.productName {
+  font-size: 2rem;
+  color: #333;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.taxInfo {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.descriptionSection {
+  margin-bottom: 1.5rem;
+}
+
+.descriptionSection h3 {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.descriptionText {
+  color: #666;
+  line-height: 1.6;
+}
+
+.metadataSection {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stockInfo, .shippingInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.inStockIcon {
+  color: #28a745;
+}
+
+.inStockText {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.outOfStockIcon {
+  color: #dc3545;
+}
+
+.outOfStockText {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.shippingIcon {
+  color: #ff3e6c;
+}
+
+.shippingInfo span {
+  color: #555;
+}
+
+.actionSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+@media (min-width: 576px) {
+  .actionSection {
+    flex-direction: row;
+  }
+}
+
+.addToCartBtn, .buyNowBtn {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  border: none;
+}
+
+.addToCartBtn {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.addToCartBtn:hover:not(:disabled) {
+  background-color: #ffb300;
+  transform: translateY(-2px);
+}
+
+.addToCartBtn:disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.buyNowBtn {
+  background-color: #ff3e6c;
+  color: white;
+}
+
+.buyNowBtn:hover {
+  background-color: #e83963;
+  transform: translateY(-2px);
+}
+
+.loadingContainer, .notFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.notFoundContainer h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.notFoundContainer p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.backBtn:hover {
+  background-color: #555;
+}

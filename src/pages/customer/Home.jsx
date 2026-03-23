@@ -21,7 +21,8 @@ const Home = () => {
     }
   }, [nearestStore, locationError, isLoading, requestLocation]);
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (e, product) => {
+    e.stopPropagation();
     if (user?.role === 'guest') {
       alert("Please login to add items to your cart.");
       navigate('/login', { state: { productToAdd: product } });
@@ -47,7 +48,12 @@ const Home = () => {
         ) : (
           <div className={styles.productGrid}>
             {products.map((product) => (
-              <div key={product.id} className={styles.productCard}>
+              <div 
+                key={product.id} 
+                className={styles.productCard}
+                onClick={() => navigate(`/product/${product.id}`)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className={styles.imageContainer}>
                   <img src={product.image || import.meta.env.VITE_PLACEHOLDER_IMAGE_URL} alt={product.name} className={styles.productImage} />
                 </div>
@@ -58,7 +64,7 @@ const Home = () => {
                     <span className={styles.price}>₹{product.price}</span>
                     <button 
                       className={styles.addBtn}
-                      onClick={() => handleAddToCart(product)}
+                      onClick={(e) => handleAddToCart(e, product)}
                       title="Add to Cart"
                     >
                       <ShoppingCart size={16} />

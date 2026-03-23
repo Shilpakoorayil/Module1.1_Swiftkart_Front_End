@@ -7,6 +7,7 @@ import Home from './pages/customer/Home';
 import Login from './pages/customer/Login';
 import Cart from './pages/customer/Cart';
 import Checkout from './pages/customer/Checkout';
+import ProductDetails from './pages/customer/ProductDetails';
 
 // Admin Pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -32,6 +33,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="product/:id" element={<ProductDetails />} />
         </Route>
 
         {/* Admin Routes with Admin Layout */}
